@@ -1,6 +1,6 @@
 # Agentic Rollout Plan (v1)
 
-**Status:** DRAFT, awaiting wolfie's sign-off. **No execution until this plan is approved.**
+**Status:** APPROVED.
 **Source:** synthesized from a 9-expert planning panel (skills, MCP, CLI, subagents, harness, A2A, RAG, API, frameworks), each grounded against the real repos. **Date:** 2026-07-17.
 
 ---
