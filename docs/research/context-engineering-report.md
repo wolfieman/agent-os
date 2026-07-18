@@ -1,4 +1,4 @@
-# Context Engineering, Skills, and MCP
+# 🧠 Context Engineering, Skills, and MCP
 
 **A synthesis of the agentic-research reading set. Living document; more research to be appended.**
 
@@ -8,7 +8,7 @@
 
 ---
 
-## 1. The spine: the Five Terms
+## 🦴 1. The Spine: The Five Terms
 
 The IBM doc is the cleanest frame. A modern agent has five building blocks, in three groups:
 
@@ -31,7 +31,7 @@ The IBM doc is the cleanest frame. A modern agent has five building blocks, in t
 
 Takeaway: I already run all five, mostly by hand. This research is about formalizing patterns already in use, not learning foreign territory.
 
-## 2. Context engineering is the umbrella
+## ☂️ 2. Context Engineering Is the Umbrella
 
 Prompt engineering did not die; it grew into context engineering: designing the *entire* context window, not just the prompt (system prompt, instructions, user input, structured I/O, tools, RAG and memory, state and history). The Five Terms plus Skills plus MCP are all *instruments* of context engineering.
 
@@ -39,7 +39,7 @@ The unifying idea across every doc: **the context window is a scarce budget, and
 
 Candid note: `context-engineering-guide.pdf` is broad and textbook-style, a decent checklist but thin on depth. The real substance is in the Skills and MCP docs.
 
-## 3. Skills (the deep one)
+## 🎓 3. Skills (The Deep One)
 
 A Skill is a directory with `SKILL.md` (YAML frontmatter plus a markdown body) and optional scripts and resources. The core mechanic is **progressive disclosure, in three levels:**
 
@@ -58,7 +58,7 @@ Levers worth knowing (Claude Code):
 
 For me: this is the authoritative reference for what I already do a lot, and my prompt-authoring standards map straight onto skill descriptions and bodies. Two likely-underused power features: `context: fork` and dynamic injection.
 
-## 4. MCP (the access layer)
+## 🔌 4. MCP (The Access Layer)
 
 MCP is an open standard connecting the agent to tools and data (Anthropic-born, now under the Linux Foundation). A server wraps an API in a standard interface; the agent speaks MCP and the server handles the POST/GET plus authentication.
 
@@ -72,7 +72,7 @@ MCP is an open standard connecting the agent to tools and data (Anthropic-born, 
 
 For me: I already *consume* MCP. The new lever is *building* one (the `mcp-server-dev` plugin scaffolds stdio or HTTP), for example an orchestrator/`ws` MCP so any agent queries the repo inventory or blackboard through a standard tool instead of raw file reads.
 
-## 5. Skills vs MCP (the crux)
+## ⚖️ 5. Skills vs MCP (The Crux)
 
 The single cleanest line, straight from the "MCP vs Skills" doc:
 
@@ -82,7 +82,7 @@ MCP retrieves the customer record from the CRM; a Skill says how the team wants 
 
 Rule of thumb: reach for a **skill** when you keep re-pasting the same *instructions or procedure*; reach for **MCP** when you keep pasting *data* from another system.
 
-## 6. Where this points (the next step)
+## 🧭 6. Where This Points (The Next Step)
 
 "Continuing with context engineering" concretely means: the `CLAUDE.md` files plus skills plus connectors already *are* a context-engineering system. The moves are:
 
@@ -91,7 +91,7 @@ Rule of thumb: reach for a **skill** when you keep re-pasting the same *instruct
 3. Author an MCP server for my own infra so orchestrator and inter-agency become first-class *tools*, not just files.
 4. Graduate the blackboard toward real A2A / Agent-Card semantics.
 
-## 7. On penny and notebook
+## 🔎 7. On penny and notebook
 
 The five local docs were self-sufficient for absorption; penny (Perplexity) and notebook (NotebookLM) were not needed. Where they would earn their keep later: penny for *current* external state (newest Agentic AI Foundation standards, competing skill/MCP registries); notebook to fuse this plus the standards into a durable, queryable long-form corpus.
 
@@ -99,11 +99,11 @@ The five local docs were self-sufficient for absorption; penny (Perplexity) and 
 
 ---
 
-## Round 2: the harness layer, CLI-vs-MCP, frameworks, and the core repos
+## 🔁 Round 2: The Harness Layer, CLI-vs-MCP, Frameworks, and the Core Repos
 
 **Added 2026-07-17.** Source: six IBM Technology / Caleb-Writes-Code videos in `context-engineering/` (a2a-vs-mcp, agent-harness, agentic-ai-frameworks, cli-vs-mcp, mcp-vs-rag, what-is-an-api).
 
-### 8. The full stack: prompt < context < harness
+### 8. The Full Stack: Prompt < Context < Harness
 
 The most important addition. Three nested engineering layers, each wrapping the last:
 
@@ -113,7 +113,7 @@ The most important addition. Three nested engineering layers, each wrapping the 
 
 Why it emerged: long tasks plus context summarization means the agent shrinks its own context and then "assumes the task is done," leaving work half-finished. The fix is not a bigger window; it is a loop: write a requirements doc (often JSON), then loop one task at a time, test and document each, fresh context per iteration, until done. (Reference architectures: "Ralph," Anthropic's harness demo, and now most coding agents build the harness layer in.)
 
-### 9. Three clean decision axes
+### 9. Three Clean Decision Axes
 
 **Access to *data*: RAG vs MCP.** RAG = *know more* (retrieve static/unstructured knowledge into context, ground answers, cite sources; steps: ask, retrieve, return, augment, generate). MCP = *do more* (connect to systems to act; steps: discover, understand, plan, execute, integrate). They combine (MCP can call RAG as a tool). Rule: retrieve knowledge with RAG, take actions with MCP.
 
@@ -123,7 +123,7 @@ Why it emerged: long tasks plus context summarization means the agent shrinks it
 
 **APIs underneath.** Every one of these sits on APIs: the standardized contract letting software talk. For AI, an API is both a "straw" (feed private data in) and a hand (act). Types: web/HTTP (open, partner, internal, composite), plus database and OS APIs; protocols REST, GraphQL, gRPC, SOAP, WebSocket. Constants: auth, encryption, rate limiting.
 
-### 10. Frameworks: pick by system shape, not popularity
+### 10. Frameworks: Pick by System Shape, Not Popularity
 
 | System shape | When | Framework fit |
 |---|---|---|
@@ -133,7 +133,7 @@ Why it emerged: long tasks plus context summarization means the agent shrinks it
 | Production orchestration | real-world, deep API/DB/workflow integration | LangGraph, Agent Framework |
 | Rapid prototyping | validate an idea fast, drag-and-drop | LangFlow, Flowise |
 
-### 11. Applied to the three core repos
+### 11. Applied to the Three Core Repos
 
 **Headline: inter-agency is already a hand-built version of most of this.** The other two are earlier on the curve.
 
@@ -153,13 +153,13 @@ Why it emerged: long tasks plus context summarization means the agent shrinks it
   - Pure personal-ops: budget = CSV + Python (`analyze_budget.py`, `loan_payoff.py`), privacy-first (data gitignored, sanitization bar). No agents/skills/MCP, and the research says that is *correct* for a predictable, CLI-shaped domain.
   - **Move (light touch):** two candidate **skills** wrapping the existing scripts (a monthly budget-close skill; a loan-payoff skill), invoked on demand, so the recurring procedure is one command instead of re-explained monthly. MCP is justified here *only* if sensitive-data access ever needs governance (per-source access, audit); otherwise the CLI/Python path is the right, cheap answer. Multi-agent frameworks would be over-engineering.
 
-### Cross-repo rule of thumb
+### Cross-Repo Rule of Thumb
 
 **Prompt** = who the agent is (CLAUDE.md persona), **context** = what it sees (four-verb chaining), **harness** = the loop that runs it (inter-agency's blackboard). Add **skills** where a procedure repeats, **CLI** where the model already knows the tool, **MCP** where there is a real gap or a governance need, **RAG** where it must *know* more, **A2A** where agents talk to agents. inter-agency is the mature node; infra is a skills-formalization opportunity; life-admin should stay deliberately lean.
 
 ---
 
-## Appendix: research log
+## 📎 Appendix: Research Log
 
 - **2026-07-17:** initial synthesis from the five base docs (sections 1 to 7).
 - **2026-07-17:** round 2, six augmenting docs plus application to infra / life-admin / inter-agency (sections 8 to 11).

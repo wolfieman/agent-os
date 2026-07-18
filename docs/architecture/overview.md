@@ -1,10 +1,10 @@
-# Agent OS: Architecture Overview
+# 🏛️ Agent OS: Architecture Overview
 
 This document provides a high-level overview of the `agent-os` architecture. It explains how the system is structured to provide safety, scheduling, observability, memory, and sandboxing to autonomous agents.
 
 ---
 
-## 1. System Layers
+## 🧱 1. System Layers
 
 Agent OS is designed as a three-tier system:
 
@@ -28,7 +28,7 @@ Agent OS is designed as a three-tier system:
 
 ---
 
-## 2. The Context Plane: Core OS Foundation
+## 🧩 2. The Context Plane: Core OS Foundation
 
 The foundation of the kernel is the **Context Plane** (formalized in [ADR 0006](file:///home/wolfie/projects/agent-os/docs/decisions/0006-context-plane-as-kernel-foundation.md)). The Context Plane is responsible for assembling the **Frame** (the payload sent to the LLM) from contributions provided by the kernel services.
 
@@ -65,7 +65,7 @@ The Frame is a structured JSON payload constructed dynamically per LLM call:
 
 ---
 
-## 3. Resolving the Open Questions
+## ❓ 3. Resolving the Open Questions
 
 ### Q1: The Context-Assembly Service Design
 The Context-Assembly service exposes four core verbs as its API:

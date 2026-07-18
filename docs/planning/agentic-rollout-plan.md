@@ -1,11 +1,11 @@
-# Agentic Rollout Plan (v1)
+# 🚀 Agentic Rollout Plan (v1)
 
 **Status:** APPROVED.
 **Source:** synthesized from a 9-expert planning panel (skills, MCP, CLI, subagents, harness, A2A, RAG, API, frameworks), each grounded against the real repos. **Date:** 2026-07-17.
 
 ---
 
-## What the panel found (corrections to the briefing)
+## 🔍 What the Panel Found (Corrections to the Briefing)
 
 The experts verified against source and surfaced assets the briefing missed. These change the baseline:
 
@@ -17,11 +17,11 @@ The experts verified against source and surfaced assets the briefing missed. The
 - **adagio's Ollama endpoint has no app auth** (Tailscale-only), and `agent.py` uses `api_key="ollama"` (a placeholder). Flagged as the estate's top security gap. The adagio URL is DRY-broken (hardcoded in two repos).
 - **Distribution is already answered:** `standards/claude-tooling/skills-and-agents.md` §5 prescribes symlink-now, plugin-later. Not a new decision.
 
-## Confirmed: the placement model
+## 📍 Confirmed: The Placement Model
 
 All nine experts confirmed it: **orchestrator sources, projects own, inter-agency runs, infra powers.** No changes.
 
-## Key decisions the panel made (deferrals worth noting)
+## 🗝️ Key Decisions the Panel Made (Deferrals Worth Noting)
 
 - **DEFER the orchestrator/`ws` inventory MCP.** `ws status --json` already gives structured state to every Bash-capable actor; an MCP peer would be schema cost for zero new capability. Build only if a non-Bash actor (agy, codex) genuinely needs it. *(This overrules the briefing's suggestion.)*
 - **DEFER formal A2A** (Agent Cards over JSON-RPC/HTTP/SSE) to `agentic-lab` backlog, gated on a real external/vendor agent to interoperate with. The cheap on-path step (an actor-card sidecar) is in Phase 4.
@@ -30,11 +30,11 @@ All nine experts confirmed it: **orchestrator sources, projects own, inter-agenc
 
 ---
 
-## The phased plan
+## 📋 The Phased Plan
 
 Each phase: **Goal · Tasks · Depends on · Done-criterion.** Owners map to the inter-agency execution team.
 
-### Phase 0 — Foundation & reconciliation (cheap, gates the rest)
+### Phase 0: Foundation & Reconciliation (Cheap, Gates the Rest)
 
 - **Goal:** correct the ground truth and write the two standards that discipline every later build decision.
 - **Tasks:**
@@ -46,7 +46,7 @@ Each phase: **Goal · Tasks · Depends on · Done-criterion.** Owners map to the
 - **Done:** the two standards exist and the next MCP/API proposal cites them; the adagio decision is written down; the inventory is corrected.
 - **Owner:** claude (authoring) + wolfie (review/adagio decision).
 
-### Phase 1 — Skills first (pilot) + subagent audit
+### Phase 1: Skills First (Pilot) + Subagent Audit
 
 - **Goal:** prove the skills pattern end-to-end on the lowest-risk, highest-repetition surface, and close the subagent debt.
 - **Tasks:**
@@ -57,7 +57,7 @@ Each phase: **Goal · Tasks · Depends on · Done-criterion.** Owners map to the
 - **Done:** "close out July's budget" auto-triggers the skill and reproduces the hand-run `close-summary.md` in fewer turns, no steps skipped; every subagent has a recorded verdict.
 - **Owner:** claude (skills + audit) + wolfie (privacy sign-off on any credential-ops skill).
 
-### Phase 2 — Prove MCP/RAG on real data + the standards index
+### Phase 2: Prove MCP/RAG on Real Data + the Standards Index
 
 - **Goal:** move the infra servers from demo to real, and stand up the "query our own knowledge" tool.
 - **Tasks:**
@@ -67,7 +67,7 @@ Each phase: **Goal · Tasks · Depends on · Done-criterion.** Owners map to the
 - **Done:** `list_schema` returns real tables; `search_docs` answers 4/5 real past-confusion questions with the right source file; no life-admin/credential-ops/email-ops data indexed.
 - **Owner:** claude/codex (ai-ops) + hope/adagio (backend).
 
-### Phase 3 — Harness: fix the finish-gate, then formalize
+### Phase 3: Harness: Fix the Finish-Gate, Then Formalize
 
 - **Goal:** close the real bug before documenting the pattern.
 - **Tasks:**
@@ -77,7 +77,7 @@ Each phase: **Goal · Tasks · Depends on · Done-criterion.** Owners map to the
 - **Done:** a task whose dispatched agent omits the verification line is refused completion and re-surfaced; a proper one completes; the standard documents the true behavior.
 - **Owner:** claude (code) + wolfie (HITL).
 
-### Phase 4 — A2A: machine-readable actor cards (on-path, cheap)
+### Phase 4: A2A: Machine-Readable Actor Cards (On-Path, Cheap)
 
 - **Goal:** take the one real step toward A2A without building a protocol.
 - **Tasks:** generate an actor-card sidecar (role/inputs/outputs) *from and validated against* `collaboration-matrix.md` (extend the `VALID_ACTORS` single-source pattern); expose it via `mcp_server.py` resources.
@@ -85,7 +85,7 @@ Each phase: **Goal · Tasks · Depends on · Done-criterion.** Owners map to the
 - **Done:** editing the matrix without updating the sidecar fails validation non-zero; the coordination MCP returns capability fields per actor.
 - **Owner:** agy (architecture) + claude.
 
-### Phase 5 — Frameworks: the one real build
+### Phase 5: Frameworks: The One Real Build
 
 - **Goal:** the single legitimate framework build; keep it scoped.
 - **Tasks:** finish `agentic-lab` Phase 1 (`prompt_chain.py`, currently `NotImplementedError`), then a **2-node LangGraph graph (researcher → writer) with checkpointing** as the first increment; add the reviewer loop as a second increment.
@@ -95,7 +95,7 @@ Each phase: **Goal · Tasks · Depends on · Done-criterion.** Owners map to the
 
 ---
 
-## Cross-cutting (applies to every phase)
+## 🔀 Cross-Cutting (Applies to Every Phase)
 
 - **Capture → distill → graduate:** each proven pattern graduates into `standards/agentic/` (rule of three); the study/build source of truth stays `agentic-lab`.
 - **Privacy deny-lists:** life-admin, credential-ops, email-ops are never auto-executed by the harness, never indexed into a shared RAG, never scoped to a broad-access subagent. Hard checks in code, not just docs.
@@ -103,11 +103,11 @@ Each phase: **Goal · Tasks · Depends on · Done-criterion.** Owners map to the
 - **Commits human-run**, `[TAG][TYPE]`, no AI attribution.
 - **Right-tool discipline everywhere:** default CLI; MCP only at a gap; RAG only where grep fails; framework only where a shape demands it.
 
-## Addendum v1.1: three cross-cutting disciplines
+## ➕ Addendum v1.1: Three Cross-Cutting Disciplines
 
 Added 2026-07-17 from the `a2a/` research (A2A protocol, multi-agent systems, and the IBM+Anthropic secure-agents guide). These sharpen the plan's weakest axis: not "can agents act" but "do they act *correctly, safely, and verifiably*."
 
-### A. Framework & structure selection (pick by shape, not popularity)
+### A. Framework & Structure Selection (Pick by Shape, Not Popularity)
 
 Selection is two nested questions, not one:
 
@@ -118,7 +118,7 @@ Your estate maps cleanly: inter-agency = **hierarchical role-based** (wolfie/orc
 
 **Deliverable:** `standards/agentic/framework-selection.md` (single-vs-multi test + structure rubric + the five-shapes table + the estate mapping). Slots into **Phase 0** as a gating standard; governs **Phase 5**.
 
-### B. Harness enforcement (make the boundary real; do not trust behavior)
+### B. Harness Enforcement (Make the Boundary Real; Do Not Trust Behavior)
 
 The harness must **deterministically enforce** controls, not rely on the agent behaving. The panel already found the gap (a task auto-completes on exit-code-0). The IBM+Anthropic secure-agents guide names the full control set to enforce:
 
@@ -131,7 +131,7 @@ The harness must **deterministically enforce** controls, not rely on the agent b
 
 **Expands Phase 3:** the harness work grows from "fix the finish-gate" to "fix the finish-gate + stand up the enforcement layer" (identity, scoped permissions, audit log, sandbox boundary). Ground it in the actual IBM+Anthropic guide.
 
-### C. Communication verification: how do we know they deliver the right stuff?
+### C. Communication Verification: How Do We Know They Deliver the Right Stuff?
 
 The answer is a paradigm shift the secure-agents guide names outright: **evaluation-first** (measure outcomes against the stated goal, not implementation). Concretely, a four-layer verification stack for every agent-to-agent handoff:
 
@@ -146,22 +146,13 @@ Your file-based handoffs already have a rough version (What Has Been Done / Next
 
 ---
 
-## Addendum v1.2: the agent-os pivot and the context plane
+## ➕ Addendum v1.2: The agent-os Pivot and the Context Plane
 
-Added 2026-07-18. Working Phase 0 bullet 1 (reconcile the inventory) surfaced that the
-highest-leverage asset is not a doc to catalog but a system to build: an **agent
-operating system** (`agent-os`, its own repo). The initiative's center of gravity is
-now that build; the estate-wide Phase 0 above is **paused, contingent on the OS**
-(writing the asset map and the CLI/MCP/API standards before the OS exists means writing
-them twice, since the OS reorganizes what the assets are and how they are categorized).
-Research and plan now live in `agent-os/docs/`; live coordination stays in
-`inter-agency/context-engineering/`.
+Added 2026-07-18. Working Phase 0 bullet 1 (reconcile the inventory) surfaced that the highest-leverage asset is not a doc to catalog but a system to build: an **agent operating system** (`agent-os`, its own repo). The initiative's center of gravity is now that build; the estate-wide Phase 0 above is **paused, contingent on the OS** (writing the asset map and the CLI/MCP/API standards before the OS exists means writing them twice, since the OS reorganizes what the assets are and how they are categorized). Research and plan now live in `agent-os/docs/`; live coordination stays in `inter-agency/context-engineering/`.
 
-### The foundation: the context plane
+### The Foundation: The Context Plane
 
-The OS is built kernel-first, one service at a time (walking skeleton). Its
-**foundation is the context plane**: the layer that constructs every model call,
-sitting under the six kernel services and above the raw model.
+The OS is built kernel-first, one service at a time (walking skeleton). Its **foundation is the context plane**: the layer that constructs every model call, sitting under the six kernel services and above the raw model.
 
 ```
 agents / teams    actors that run
@@ -184,14 +175,9 @@ Two categories, one role:
   question: context-assembly is a distinct subsystem, not folded into memory and not a
   seventh peer service.
 
-**Prompt engineering is the base of context engineering, not a peer of it.** The
-instruction slot is the small static core, roughly 20 percent, that the plane wraps in
-dynamically assembled content, roughly 80 percent: memory, task state, retrieval, and
-tool interfaces populated at runtime. Put plainly: better prompts give better
-questions; the plane gives better systems. Prompt-craft is the foundation the plane is
-built on, which is why the two standards were always going to converge.
+**Prompt engineering is the base of context engineering, not a peer of it.** The instruction slot is the small static core, roughly 20 percent, that the plane wraps in dynamically assembled content, roughly 80 percent: memory, task state, retrieval, and tool interfaces populated at runtime. Put plainly: better prompts give better questions; the plane gives better systems. Prompt-craft is the foundation the plane is built on, which is why the two standards were always going to converge.
 
-### What the plane is made of (from the context-engineering research)
+### What the Plane Is Made Of (From the Context-Engineering Research)
 
 - **The frame** is the plane's output schema, assembled per call from four services:
   instructions and output-format (guardrails), user input (scheduler), retrieved facts
@@ -211,12 +197,9 @@ built on, which is why the two standards were always going to converge.
   checkpoint), confusion (relevance filter on select), clash (contradiction detection
   plus a precedence policy). Instrumented by observability and guardrails.
 
-### The prompt-engineering half already exists (orchestrator)
+### The Prompt-Engineering Half Already Exists (orchestrator)
 
-The plane's instruction-slot discipline is not new work; it is a mature body of
-standards in orchestrator, distilled from Anthropic's prompt-engineering guide and
-tuned for Opus 4.8. The OS consumes these by reference (orchestrator owns them, the OS
-cites them, nothing is copied):
+The plane's instruction-slot discipline is not new work; it is a mature body of standards in orchestrator, distilled from Anthropic's prompt-engineering guide and tuned for Opus 4.8. The OS consumes these by reference (orchestrator owns them, the OS cites them, nothing is copied):
 
 - **The rules:** `standards/ai-codegen/prompt-authoring.md`, an 18-rule authoring
   standard where each rule carries its *why* (specific output and constraints, positive
@@ -237,23 +220,11 @@ cites them, nothing is copied):
   `prompt-authoring` skill surfaces the library on demand. This is the precursor to the
   OS selecting a prompt for the instruction slot.
 
-Two things this settles. First, the prompt and context standards are **already
-connected**: `prompt-authoring.md` rule 16 cross-references
-`standards/agentic/context-and-chaining.md` §3 (the failure-mode taxonomy), and MAP
-plus rule 14 (long-context) already reach into context engineering. The plane
-operationalizes an already-linked pair; it does not invent the union. Second, the
-**co-evolution loop** is concrete: the built plane graduates refinements back into
-`prompt-authoring.md` and `context-and-chaining.md`, both written for the manual /
-artifact world and now getting OS-aware extensions.
+Two things this settles. First, the prompt and context standards are **already connected**: `prompt-authoring.md` rule 16 cross-references `standards/agentic/context-and-chaining.md` §3 (the failure-mode taxonomy), and MAP plus rule 14 (long-context) already reach into context engineering. The plane operationalizes an already-linked pair; it does not invent the union. Second, the **co-evolution loop** is concrete: the built plane graduates refinements back into `prompt-authoring.md` and `context-and-chaining.md`, both written for the manual / artifact world and now getting OS-aware extensions.
 
-### OS Phase 0: stand up the observable context plane
+### OS Phase 0: Stand Up the Observable Context Plane
 
-The OS's own Phase 0 is the walking skeleton: **an observable context-assembly
-service** that builds the 7-piece frame, applies prompt-craft to the instruction slot,
-and emits a trace of what it assembled. This fuses the two foundations (context plus
-prompt) with the AgentOps ordering (observability first): the trace of the frame is
-exactly how the four failure modes get caught. The five remaining kernel services are
-later increments that plug into the plane.
+The OS's own Phase 0 is the walking skeleton: **an observable context-assembly service** that builds the 7-piece frame, applies prompt-craft to the instruction slot, and emits a trace of what it assembled. This fuses the two foundations (context plus prompt) with the AgentOps ordering (observability first): the trace of the frame is exactly how the four failure modes get caught. The five remaining kernel services are later increments that plug into the plane.
 
 - **Done-criterion:** a LogLook-analog agent (a fleet-log or mailbox-ops triage agent
   on real data) runs end to end on the plane, exercising all seven frame pieces and all
@@ -265,7 +236,7 @@ later increments that plug into the plane.
 
 ---
 
-## Open decisions for wolfie (before or during execution)
+## 🧭 Open Decisions for wolfie (Before or During Execution)
 
 1. **adagio auth:** accept-and-document Tailscale-only, or add a real credential? (Phase 0.)
 2. **Pilot confirmation:** life-admin `budget-close` as the first skill? (Phase 1.)
@@ -276,11 +247,11 @@ later increments that plug into the plane.
 
 ---
 
-## Addendum v1.3: Architecture Alignment & Next Moves
+## ➕ Addendum v1.3: Architecture Alignment & Next Moves
 
 Added 2026-07-18. Following a deep architecture review, the open questions from the cowork handoff and the open decisions have been resolved and aligned with the architectural specifications in `docs/architecture/`.
 
-### A. Recommended Decisions for Wolfie
+### A. Recommended Decisions for wolfie
 
 1. **adagio auth:** Accept Tailscale-only for local coordinate transport, but require token-based auth for the VM database write tools. Set a unique API key for each agent in their local environment config (rather than the global placeholder `"ollama"`) to satisfy the secure-agents guide's **non-human identity** principle.
 2. **Pilot confirmation:** Confirm `life-admin` monthly `budget-close` and `loan-payoff` as the first skills. Set `disable-model-invocation: true` on both skills in frontmatter to guarantee they are only triggered manually by the user, ensuring financial operations are never run autonomously.

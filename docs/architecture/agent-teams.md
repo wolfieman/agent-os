@@ -1,10 +1,10 @@
-# OS / Teams Seam: Sibling Architecture
+# 🔗 OS / Teams Seam: Sibling Architecture
 
 This document describes the design boundary between `agent-os` (the kernel repository) and `agent-teams` (the future sibling repository that defines multi-agent policies).
 
 ---
 
-## 1. Mechanism vs. Policy
+## ⚖️ 1. Mechanism vs. Policy
 
 The boundary between the kernel and the teams layer follows the classic software engineering principle: **separate mechanism from policy**.
 
@@ -15,7 +15,7 @@ The boundary between the kernel and the teams layer follows the classic software
 
 ---
 
-## 2. The Seam: Actor Cards & Blackboard Tasks
+## 🔌 2. The Seam: Actor Cards & Blackboard Tasks
 
 The interaction between the kernel and the teams layer occurs through two primary structures:
 
@@ -46,7 +46,7 @@ When a multi-agent team decides to delegate work:
 
 ---
 
-## 3. Communication Patterns
+## 📡 3. Communication Patterns
 
 Multi-agent coordination in `agent-teams` is implemented using state graphs (LangGraph). The graph nodes execute within sandbox boundaries managed by the kernel:
 
@@ -70,7 +70,7 @@ This structure ensures that even complex multi-agent graphs with autonomous rout
 
 ---
 
-## 4. Actor Roles & Specializations
+## 🎭 4. Actor Roles & Specializations
 
 ```
                     +---------------------------------------+
@@ -96,7 +96,7 @@ This structure ensures that even complex multi-agent graphs with autonomous rout
                             +-----------------------+
 ```
 
-### A. Claude Code CLI (`claude`) — The Implementer
+### A. Claude Code CLI (`claude`): The Implementer
 
 `claude` (running Claude Code CLI) is highly optimized for direct, local code operations, fast editing loops, and running terminal tests.
 
@@ -106,7 +106,7 @@ This structure ensures that even complex multi-agent graphs with autonomous rout
   * Writing the `examples/log_look.py` triage agent.
 * **How to engage:** Create execution tasks (e.g., `os-001: Build Context Assembly Service`) on the blackboard `state.json` and assign them to `claude`. The harness orchestrator will launch the CLI to code, run tests, and generate the required artifacts.
 
-### B. Claude Cowork (`cowork`) — The Coordination & Standards Lead
+### B. Claude Cowork (`cowork`): The Coordination & Standards Lead
 
 `cowork` excels at high-level planning, synthesis, panel operations, and prose-standards drafting.
 
@@ -116,7 +116,7 @@ This structure ensures that even complex multi-agent graphs with autonomous rout
   * Coordinating multi-repo updates when the paused estate-wide context rollout resumes.
 * **How to engage:** Assign planning, standardisation, and document-drafting tasks on the blackboard to `cowork`.
 
-### C. Codex (`codex`) — The Auditor & Safety Officer
+### C. Codex (`codex`): The Auditor & Safety Officer
 
 `codex` (optimized for codebase checks and security) excels at finding edge-case logic flaws, validating safety structures, and auditing design compliance.
 
@@ -126,7 +126,7 @@ This structure ensures that even complex multi-agent graphs with autonomous rout
   * **Privacy/DLP Audit:** Scanning the generated traces to ensure no sensitive files or credentials (e.g., `life-admin` details) leak into the logs.
 * **How to engage:** Create audit tasks (e.g., `os-audit-01: Verify sandbox limits and path-traversal prevention`) and assign them to `codex` on the blackboard once `claude` completes an implementation.
 
-### D. Agy (`agy`) — The Architect & Director (Our Role)
+### D. Agy (`agy`): The Architect & Director (Our Role)
 
 We act as the central authority on system constraints, framework decisions, and ADR validation.
 

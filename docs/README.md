@@ -1,15 +1,12 @@
-# agent-os docs: the initiative map
+# 🗺️ agent-os docs: The Initiative Map
 
-This is the "you are here" for the agent-os initiative: what it is, where each piece
-lives, and the current status.
+This is the "you are here" for the agent-os initiative: what it is, where each piece lives, and the current status.
 
-## What this is
+## 🎯 What This Is
 
-Building an operating system for AI agents (a kernel: scheduler, memory, tools,
-identity, observability, guardrails), with a teams layer as a future sibling repo. It
-grew out of the context-engineering research effort.
+Building an operating system for AI agents (a kernel: scheduler, memory, tools, identity, observability, guardrails), with a teams layer as a future sibling repo. It grew out of the context-engineering research effort.
 
-## Where things live
+## 📍 Where Things Live
 
 - **Research** (`research/`): `context-engineering-report.md` is the synthesis;
   `sources/` holds the source transcripts it distills.
@@ -20,7 +17,7 @@ grew out of the context-engineering research effort.
 - **Planning** (`planning/`): `agentic-rollout-plan.md` is the initiative plan;
   `rollout-planning-briefing.md` is the panel input that fed it.
 
-## Status
+## 🚦 Status
 
 - Context-engineering rollout: **Phase 0 paused**, contingent on building this OS. The
   verified inventory and the two-tier asset-map design are recorded in the plan.

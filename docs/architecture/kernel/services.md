@@ -1,10 +1,10 @@
-# Agent OS Kernel Services: Specifications
+# ⚙️ Agent OS Kernel Services: Specifications
 
 This document outlines the detailed specifications, boundaries, and interfaces for the six core kernel services of Agent OS.
 
 ---
 
-## 1. Scheduler Service
+## 🗓️ 1. Scheduler Service
 
 The Scheduler is responsible for managing task lifecycles, assigning tasks to agents, and ensuring execution order.
 
@@ -21,7 +21,7 @@ The Scheduler is responsible for managing task lifecycles, assigning tasks to ag
 
 ---
 
-## 2. Memory Manager Service
+## 🧠 2. Memory Manager Service
 
 The Memory Manager gives agents short-term and long-term context retention.
 
@@ -36,7 +36,7 @@ The Memory Manager gives agents short-term and long-term context retention.
 
 ---
 
-## 3. Tool Manager Service
+## 🧰 3. Tool Manager Service
 
 The Tool Manager acts as a dynamic toolbox for the agent, exposing schemas and executing commands.
 
@@ -51,7 +51,7 @@ The Tool Manager acts as a dynamic toolbox for the agent, exposing schemas and e
 
 ---
 
-## 4. Identity Manager Service
+## 🪪 4. Identity Manager Service
 
 The Identity Manager establishes trust, authentication, and actor credentials.
 
@@ -66,7 +66,7 @@ The Identity Manager establishes trust, authentication, and actor credentials.
 
 ---
 
-## 5. Observability Service
+## 📹 5. Observability Service
 
 Observability is the "security camera" of the OS, recording execution metrics and decision paths.
 
@@ -81,14 +81,14 @@ Observability is the "security camera" of the OS, recording execution metrics an
 
 ---
 
-## 6. Guardrails Service
+## 🛡️ 6. Guardrails Service
 
 Guardrails act as the safety net, analyzing inputs and validating outputs.
 
 - **Responsibilities:**
   - **Input Guardrails:** Inspect incoming prompts for prompt injections or malicious override attempts.
   - **Output Guardrails (AI Firewall):** Inspect model outputs before executing actions or returning results to verify structured formatting (e.g. valid JSON) and prevent Data Loss Prevention (DLP) violations.
-  - **Verification Enforcement:** Enforce the "finish gate" rule—rejecting task completion if the output lacks verified proof (e.g. output format check, test check).
+  - **Verification Enforcement:** Enforce the "finish gate" rule, rejecting task completion if the output lacks verified proof (e.g. output format check, test check).
 - **Syscall / API Interface:**
   - `validate_input(prompt: str) -> bool`
   - `validate_output(output: str, schema: dict) -> OutputValidationResult`

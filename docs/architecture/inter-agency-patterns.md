@@ -1,10 +1,10 @@
-# Harvesting Inter-Agency Patterns for Agent OS
+# 🌾 Harvesting inter-agency Patterns for Agent OS
 
 This document outlines how the successful, hand-rolled collaboration patterns from the `inter-agency` repository are harvested, standardized, and promoted to first-class features of the `agent-os` kernel.
 
 ---
 
-## 1. Summary of Promoted Patterns
+## 📋 1. Summary of Promoted Patterns
 
 | Inter-Agency Pattern | Promoted Kernel Feature | Description |
 |---|---|---|
@@ -16,7 +16,7 @@ This document outlines how the successful, hand-rolled collaboration patterns fr
 
 ---
 
-## 2. Blackboard State Promotion
+## 🗂️ 2. Blackboard State Promotion
 
 The inter-agency `state.json` tracks a list of tasks. In `agent-os`, the blackboard is promoted to a scheduler-owned subsystem. 
 
@@ -26,7 +26,7 @@ The inter-agency `state.json` tracks a list of tasks. In `agent-os`, the blackbo
 
 ---
 
-## 3. Concurrency Lock Leases
+## 🔒 3. Concurrency Lock Leases
 
 Locking in `inter-agency` was accomplished using raw JSON file reads/writes in `lock_manager.py`. In `agent-os`, locking is promoted to a core kernel service:
 
@@ -36,7 +36,7 @@ Locking in `inter-agency` was accomplished using raw JSON file reads/writes in `
 
 ---
 
-## 4. Structured Handoffs (The A2A Seam)
+## 🤝 4. Structured Handoffs (The A2A Seam)
 
 Handoffs in `inter-agency` were written as markdown files (`to_claude.md`, `to_agy.md`). While human-readable, this format is difficult for agents to parse deterministically.
 
@@ -51,7 +51,7 @@ In `agent-os`, handoffs are promoted to a two-part format:
 
 ---
 
-## 5. Harness HITL Gate & Time Policy
+## 🚦 5. Harness HITL Gate & Time Policy
 
 - **The HITL safety net:** The `pending_approval` status halts execution. The user can review the proposed handoff and execution plan before the scheduler dispatches the agent process.
 - **Timezone offsets:** Every timestamp written to logs, traces, lock files, and handoffs must include the local timezone offset to avoid coordination errors during timezone shifts.

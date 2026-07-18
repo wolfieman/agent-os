@@ -1,4 +1,4 @@
-# Rollout Planning: Shared Briefing for the Expert Panel
+# 📄 Rollout Planning: Shared Briefing for the Expert Panel
 
 **Purpose.** This is the shared context every expert on the planning panel reads before drafting their slice. The goal is a lean-but-thorough phased plan to roll out **skills, MCP, RAG, subagents, agent-harness, A2A, CLI, API, and framework** patterns across Wolfgang Sanyer's repo estate. Read the companion `context-engineering-report.md` (both rounds) for the concept synthesis; this doc is the ground truth on *what already exists* so the plan builds on reality, not assumptions.
 
@@ -14,7 +14,7 @@
 
 ---
 
-## 1. The whole repo estate
+## 🗺️ 1. The Whole Repo Estate
 
 | Code | Repo | Domain |
 |---|---|---|
@@ -34,9 +34,9 @@ The four **chore repos** (`ORCHSTR`, `AGENCY`, `INFRA`, `LIFE`) are infrastructu
 
 ---
 
-## 2. The four chore repos in detail
+## 🧱 2. The Four Chore Repos in Detail
 
-### orchestrator (the library / source)
+### orchestrator (The Library / Source)
 
 - **`standards/`** (the single source of cross-repo conventions), tiers include: `agentic/`, `ai-codegen/`, `git/` (now has §6 "track vs local-only"), `docs-prose/`, `hooks/`, `ci/`, `cd/`, `python/`, `shell/`, `web-ts/`, `sql-data/`, `testing/`, `universal/`, `patterns/`, `principles/`, `brand/`, `claude-tooling/`, plus top-level `PLAYBOOK.md`, `tool-selection.md`, `advisor-tool-protocol.md`, `sdlc-tooling-survey.md`, `public-exposure-checklist.md`, `open-decisions.md`, `facets.md`.
   - **`standards/agentic/`** already exists: `context-and-chaining.md` (the context-engineering four-verb checklist), `collaboration-matrix.md` (the agent role matrix), `inter-agency-protocol.md`, `dogfooding-model.md`. New agentic standards graduate here.
@@ -45,7 +45,7 @@ The four **chore repos** (`ORCHSTR`, `AGENCY`, `INFRA`, `LIFE`) are infrastructu
 - **`.claude/skills/`**: `evpulse` (one project-context skill). **`.claude/agents/`**: `repo-auditor.md`. User-level: a `prompt-authoring` skill and a `syllabus-map-checker` agent.
 - **`prompts/`**: `meta/`, `notebooklm/`, `playbooks/`, `runbooks/`, `templates/`, `workflows/`.
 
-### inter-agency (the runtime)
+### inter-agency (The Runtime)
 
 - **Actors** (with roles): `wolfie`, `agy` (Gemini architecture), `claude` (Sonnet dev CLI), `codex` (ChatGPT audits), `cowork` (labelled "hybrid agent harness"), `chromie`, `chatty`, `claudia`, `penny` (Perplexity research), `notebook` (NotebookLM synthesis), plus daemons `adagio` and `hope`.
 - **Blackboard pattern:** each workspace has `processing/state.json` (tasks, statuses backlog/pending_approval/in_progress/completed/failed), `handoffs/to_[actor].md` (schema: What Has Been Done / Next Actions / Checkpoints), `locks/state.lock` (lease), `shared-context/`, `logs/`.
@@ -54,21 +54,21 @@ The four **chore repos** (`ORCHSTR`, `AGENCY`, `INFRA`, `LIFE`) are infrastructu
 - **Node infra:** `hope` (workstation, local `qwen-ov` iGPU inference), `adagio` (Ollama VM: `nomic-embed-text` for vectors, `qwen3:4b`).
 - Human-in-the-loop `pending_approval` gate before any agent claims a task.
 
-### infrastructure-consulting (the AI backend + practice/lab hub)
+### infrastructure-consulting (The AI Backend + Practice/Lab Hub)
 
 - `.claude/CLAUDE.md` present.
 - **`lab/`** modules: `ai-ops` (**`agent.py`** Pydantic-AI agent, **`retrieval_server.py`** = a RAG/retrieval MCP, **`run_sql_server.py`** = a DuckDB/SQL MCP, `bench.py`, `Modelfile`), `cloud-ops` (deployment topology, tracked), `credential-ops` (KeePassXC, **local-only/untracked**), `email-ops` (mailbox.org, **local-only/untracked**), `home-network` (fleet inventory + runbooks, tracked).
 - **`practice/`**: brand, business-planning, client-development, code, data, engagements, market-research, portfolio, references, research, service-offerings. **`career/`** and the cross-repo `OPEN-ITEMS.md` tracker.
 - Fleet is CLI-first (`ws`, shell wrappers, VM launchers).
 
-### life-admin (lean personal ops)
+### life-admin (Lean Personal Ops)
 
 - `.claude/CLAUDE.md` present. Domains: `finance/` (budget = CSV + Python: `analyze_budget.py`, `loan_payoff.py`, `categories.csv`, `ACCOUNTING-CONVENTION.md`, `SANITIZATION.md`; real data gitignored under `data/`), `health/` (records gitignored), `household/` (dmv/legal gitignored PII).
 - No agents, skills, MCP, or RAG. Privacy-first; the working `.xlsx` is gitignored, PDF is the canonical tracked artifact.
 
 ---
 
-## 3. Current agentic assets, mapped to the terms
+## 📊 3. Current Agentic Assets, Mapped to the Terms
 
 | Term | What already exists | Where |
 |---|---|---|
@@ -89,7 +89,7 @@ The four **chore repos** (`ORCHSTR`, `AGENCY`, `INFRA`, `LIFE`) are infrastructu
 
 ---
 
-## 4. The Advisor tool and model levers (for execution planning)
+## 🎚️ 4. The Advisor Tool and Model Levers (for Execution Planning)
 
 - **Advisor tool:** pairs a faster **executor** model with a stronger **advisor** model (Opus) that gives strategic guidance mid-generation. Use for multi-turn planning, risk assessment, long-horizon loops, and when a wrong early decision cascades. Skip for single-turn lookups and routine ops.
 - **opusplan** (Opus plans upfront, Sonnet executes) is the sibling lever: use when the hard part is upfront. **They are alternatives, not a stack.**
@@ -97,7 +97,7 @@ The four **chore repos** (`ORCHSTR`, `AGENCY`, `INFRA`, `LIFE`) are infrastructu
 
 ---
 
-## 5. The placement model (proposed, section 12 of the report)
+## 📍 5. The Placement Model (Proposed, Section 12 of the Report)
 
 **orchestrator sources, projects own, inter-agency runs, infra powers.**
 
@@ -115,7 +115,7 @@ The four **chore repos** (`ORCHSTR`, `AGENCY`, `INFRA`, `LIFE`) are infrastructu
 
 ---
 
-## 6. What each expert returns (bounded template)
+## 📝 6. What Each Expert Returns (Bounded Template)
 
 For *your domain only*, in this exact structure so synthesis stays clean:
 

@@ -1,10 +1,10 @@
-# Agent OS Layering
+# 🏗️ Agent OS Layering
 
 This document outlines the vertical layering of Agent OS, mapping the data flow from the raw language models at the bottom to the active agent coordinators at the top.
 
 ---
 
-## The Stack
+## 📚 The Stack
 
 ```
 +-----------------------------------------------------------+
@@ -33,7 +33,7 @@ This document outlines the vertical layering of Agent OS, mapping the data flow 
 
 ---
 
-## 1. Raw Models Layer (Bottom)
+## 🧊 1. Raw Models Layer (Bottom)
 
 The foundation of the entire system is the raw language model (LLM). This layer is responsible for the raw text generation, function parsing, and embedding calculations.
 
@@ -43,7 +43,7 @@ The foundation of the entire system is the raw language model (LLM). This layer 
 
 ---
 
-## 2. Context Plane Layer
+## 🧩 2. Context Plane Layer
 
 The Context Plane is the interface directly wrapping the raw models. It handles the scarce token budget of the model's context window.
 
@@ -54,7 +54,7 @@ The Context Plane is the interface directly wrapping the raw models. It handles 
 
 ---
 
-## 3. Kernel Services Layer
+## ⚙️ 3. Kernel Services Layer
 
 The Kernel Services are modular subsystems that coordinate resources and safety. They communicate with the Context Plane using the **Syscall interface**.
 
@@ -67,7 +67,7 @@ The Kernel Services are modular subsystems that coordinate resources and safety.
 
 ---
 
-## 4. Agents / Teams Layer (Top)
+## 🤖 4. Agents / Teams Layer (Top)
 
 The uppermost layer represents the application space. It defines the specific goals, agent roles, and collaboration logic.
 

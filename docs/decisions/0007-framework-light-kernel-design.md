@@ -1,4 +1,4 @@
-# ADR 0007: Framework-Light Kernel Design
+# 🪶 ADR 0007: Framework-Light Kernel Design
 
 - **Status:** Proposed
 - **Date:** 2026-07-18
@@ -7,7 +7,7 @@
 
 ---
 
-## Context
+## 🧭 Context
 
 When architecting AI agent systems, developers often reach for orchestration frameworks (e.g., LangChain, AutoGen, CrewAI, or LangGraph) to handle the entire lifecycle of the agent.
 
@@ -20,7 +20,7 @@ Addendum v1.1 of the rollout plan outlines a framework-selection rubric based on
 - *Production Orchestration:* Deep API/DB/workflow integration, state graphs (LangGraph).
 - *Rapid Prototyping:* Canvas drag-and-drop (LangFlow, Flowise).
 
-## Decision
+## ✅ Decision
 
 1. **Kernel is Framework-Light:** The core `agent-os` repository (`src/agent_os/`) will be hand-built. We will not use LangChain, LangGraph, CrewAI, or AutoGen in the kernel. Primitives like file locks, task blackboard state (`state.json`), process isolation, and the context-assembly frame builder will be implemented in vanilla Python.
 2. **Teams Layer uses LangGraph:** The future sibling repository `agent-teams` (which represents the *policy* layer of agent interaction, role assignments, and review loops) is authorized to use LangGraph.
@@ -28,7 +28,7 @@ Addendum v1.1 of the rollout plan outlines a framework-selection rubric based on
    - **Kernel as Infrastructure:** A kernel must be highly performant, predictable, and carry minimal dependencies. Heavy frameworks introduce dependency bloat, restrict low-level control, and add black-box abstraction layers that make debugging and sandboxing more difficult.
    - **Mechanism vs. Policy:** In Unix philosophy, the kernel provides *mechanism* (locking, memory retrieval, sandboxing, trace emission) and applications provide *policy* (which agents talk to whom, in what order, using what evaluation graph). LangGraph is a policy framework; it belongs in the application space (`agent-teams`), not the kernel.
 
-## Consequences
+## ⚖️ Consequences
 
 - **Minimal Dependencies:** The kernel's `pyproject.toml` will remain lean, relying primarily on standard libraries, low-level HTTP/JSON clients, and stdio/MCP wrappers (like `mcp` or `fastmcp`).
 - **Ease of Auditing:** Hand-built security boundaries (process sandboxing, path validation) are easier to audit and guarantee than framework-abstracted executions.

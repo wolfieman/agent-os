@@ -1,4 +1,4 @@
-# Agent OS Architecture
+# 🏛️ Agent OS Architecture
 
 This document synthesizes the architectural design of `agent-os` (the Operating System for AI Agents), resolving the core questions left by `cowork` in the handoff document [to_agy.md](file:///home/wolfie/projects/inter-agency/context-engineering/processing/handoffs/to_agy.md).
 
@@ -14,7 +14,7 @@ This document synthesizes the architectural design of `agent-os` (the Operating 
 
 ---
 
-## 1. System Architecture & The Context Plane
+## 🏗️ 1. System Architecture & The Context Plane
 
 The foundation of the kernel is the **Context Plane**. In an agentic operating system, context is the primary scarce resource (subject to token bounds, attention decay, and latency). The Context Plane handles the raw formatting and assembly of the model payload (the **Frame**).
 
@@ -41,7 +41,7 @@ graph TD
 
 ---
 
-## 2. Resolving the Handoff's Open Questions
+## 🧩 2. Resolving the Handoff's Open Questions
 
 ### Q1: The Context-Assembly Service Design
 The Context-Assembly service exposes four core verbs as its API:
@@ -73,7 +73,7 @@ Following [ADR 0007](file:///home/wolfie/projects/agent-os/docs/decisions/0007-f
 
 ---
 
-## 3. Recommended Decisions for Wolfie
+## ✅ 3. Recommended Decisions for wolfie
 
 We have updated the rollout plan with **Addendum v1.3** to lock in the following architectural recommendations:
 
@@ -88,7 +88,7 @@ We have updated the rollout plan with **Addendum v1.3** to lock in the following
 
 ---
 
-## 4. Immediate Next Steps
+## 🚀 4. Immediate Next Steps
 
 To begin execution of **Phase 0 (OS Skeleton)**:
 1. **Approve this Architecture and Rollout Plan:** Review [agentic-rollout-plan.md](file:///home/wolfie/projects/agent-os/docs/planning/agentic-rollout-plan.md).
