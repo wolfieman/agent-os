@@ -23,6 +23,9 @@ build/
 .DS_Store
 Thumbs.db
 
+# Validator runtime output (examples/log_look.py writes trace.jsonl here)
+examples/logs/
+
 # Reference books / third-party PDFs: contents untracked by default (copyright +
 # bloat), but keep the folder's purpose documented. The two study-session PDFs are
 # explicitly whitelisted below (private repo).

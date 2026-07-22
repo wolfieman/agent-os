@@ -5,12 +5,19 @@ contributions supplied by the kernel services. This module exposes that
 assembly surface as `ContextAssemblyService` and its four core verbs:
 `write`, `select`, `compress`, and `isolate`.
 
-Phase 0 scope (task ce-008): `write` is functional so the service is genuinely
-stateful and testable; `select`, `compress`, and `isolate` are stubs that raise
-`NotImplementedError` because each awaits infrastructure that does not exist
-yet (hybrid search, a summarization model, and the tool sandbox respectively).
-They raise rather than return empty results so a caller can never mistake an
-unbuilt verb for a verb that found nothing.
+Phase 0 scope: `write` is functional (task ce-008) so the service is genuinely
+stateful and testable. `select`, `compress`, and `isolate` are **deterministic
+Phase 0 mocks** (task ce-093): each returns a real, honest result computed by
+lightweight fallback logic so the walking-skeleton validator (`examples/
+log_look.py`) can run the full log-triage loop end-to-end without a
+`NotImplementedError`. Every mock self-labels as a mock in its docstring — its
+result stands in for the eventual backend (hybrid search, a summarization
+model, and the tool sandbox respectively), it is not that backend.
+
+`isolate` is the one verb whose result is a security claim, so its mock never
+overstates it: `True` means "the whitelist was accepted and recorded as the
+declared sandbox boundary", explicitly **not** "isolation is enforced". A jail
+that actually confines execution awaits the real tool sandbox.
 
 Copyright © 2026 Wolfgang Sanyer
 Licensed under the Polyform Noncommercial License 1.0.0 (see LICENSE).
@@ -31,6 +38,10 @@ class ContextAssemblyService:
 
     def __init__(self) -> None:
         self._frames: dict[str, list[str]] = {}
+        # Declared sandbox boundaries recorded by `isolate`, keyed by
+        # context_id. Phase 0 records the whitelist so the mock is genuinely
+        # stateful; it does not yet enforce it (see the module docstring).
+        self._sandboxes: dict[str, list[str]] = {}
 
     def write(
         self, context_id: str, content: str, provenance: dict | None = None
@@ -71,13 +82,23 @@ class ContextAssemblyService:
             limit: Maximum number of context slices to return
 
         Returns:
-            The matching context slices
+            The matching frame entries, oldest first, capped at `limit`.
 
-        Raises:
-            NotImplementedError: Always; awaits the hybrid vector + keyword
-                search backed by the Memory Manager service
+        Phase 0 mock: a case-insensitive substring match over the frame's
+        stored entries stands in for the hybrid vector + keyword search backed
+        by the Memory Manager. `filters` is accepted for API stability but not
+        yet applied. An empty `query` matches every entry; an unknown
+        `context_id` yields an empty list (an empty frame, not an error).
         """
-        raise NotImplementedError("select awaits the hybrid search backend")
+        entries = self._frames.get(context_id, [])
+        if query:
+            needle = query.lower()
+            matches = [entry for entry in entries if needle in entry.lower()]
+        else:
+            matches = list(entries)
+        if limit is not None and limit >= 0:
+            matches = matches[:limit]
+        return matches
 
     def compress(
         self,
@@ -93,27 +114,61 @@ class ContextAssemblyService:
             target_tokens: Optional token limit to target
 
         Returns:
-            The compressed frame content
+            The compressed frame content as a single newline-joined string.
 
-        Raises:
-            NotImplementedError: Always; awaits the summarization model and the
-                token-accounting needed to target a budget
+        Phase 0 mock: line-based truncation stands in for the summarization
+        model. Frame entries are kept in order while their running token
+        estimate (whitespace-delimited words) stays within `target_tokens`;
+        once the budget would be exceeded the remainder is dropped and a
+        `"\\n[Mock Compression: Truncated to fit target_tokens]"` marker is
+        appended so a caller can never mistake a truncated frame for a whole
+        one. A `None` budget returns the full frame unchanged; `strategy` is
+        accepted for API stability but line truncation is the only Phase 0
+        strategy.
         """
-        raise NotImplementedError("compress awaits the summarization backend")
+        entries = self._frames.get(context_id, [])
+        if target_tokens is None:
+            return "\n".join(entries)
+
+        kept: list[str] = []
+        used = 0
+        truncated = False
+        for entry in entries:
+            entry_tokens = len(entry.split())
+            if used + entry_tokens > target_tokens:
+                truncated = True
+                break
+            kept.append(entry)
+            used += entry_tokens
+
+        result = "\n".join(kept)
+        if truncated:
+            marker = "[Mock Compression: Truncated to fit target_tokens]"
+            result = f"{result}\n{marker}" if result else marker
+        return result
 
     def isolate(self, context_id: str, path_whitelist: list[str]) -> bool:
-        """Restrict the frame's execution sandbox to `path_whitelist`.
+        """Record `path_whitelist` as the frame's declared sandbox boundary.
 
         Args:
             context_id: Identifier of the frame to constrain
             path_whitelist: Paths the sandbox may access
 
         Returns:
-            True once the boundary is enforced
+            True if the whitelist was accepted and recorded as the declared
+            sandbox boundary; False if it was empty or malformed (a
+            non-list, or containing a non-string / empty path), because there
+            is then no boundary to record and so no success to report.
 
-        Raises:
-            NotImplementedError: Always; awaits the tool sandbox. This verb
-                returns a security boundary, so it must never report success
-                before one is actually enforced.
+        Phase 0 mock: this verb's result is a security claim, so the mock is
+        careful never to overstate it. `True` means only that a well-formed
+        whitelist was accepted and stored as the *declared* boundary — it does
+        **not** mean execution is confined to those paths. A jail that actually
+        enforces the boundary awaits the real tool sandbox.
         """
-        raise NotImplementedError("isolate awaits the tool sandbox")
+        if not isinstance(path_whitelist, list) or not path_whitelist:
+            return False
+        if not all(isinstance(path, str) and path for path in path_whitelist):
+            return False
+        self._sandboxes[context_id] = list(path_whitelist)
+        return True
