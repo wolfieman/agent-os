@@ -33,6 +33,7 @@ The Memory Manager gives agents short-term and long-term context retention.
   - `get_chat_history(session_id: str) -> list[Message]`
   - `retrieve_context(query: str, filters: dict, limit: int) -> list[MemoryChunk]`
   - `write_memory(session_id: str, content: str, type: str) -> bool`
+- **Relationship to the context-plane verbs:** the plane's `select` verb (`src/agent_os/kernel/context.py`) is the frame-assembly entry point and calls `retrieve_context` here to pull long-term slices. `select` reads the active frame, `retrieve_context` reads the memory store: two layers of one read path, not duplicates.
 
 ---
 

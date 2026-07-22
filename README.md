@@ -13,7 +13,7 @@ Teams of agents (roles, feedback loops) are *policy* built on top of the kernel.
 
 ## 🚦 Status
 
-Charter stage. The research and the initiative plan are in `docs/`; the kernel is being built as a walking skeleton, observability first. Start at `docs/README.md` for the map, and `docs/planning/agentic-rollout-plan.md` for the plan.
+OS Phase 0 is complete: the observable context-plane walking skeleton (the four context verbs, the scheduler, the observability trace, and the `examples/log_look.py` validator) is built and tested. The remaining kernel services come next, incrementally. Start at `docs/README.md` for the map, and `docs/planning/agentic-rollout-plan.md` for the plan.
 
 ## 🗂️ Layout
 

@@ -3,6 +3,8 @@
 **Status:** APPROVED.
 **Source:** synthesized from a 9-expert planning panel (skills, MCP, CLI, subagents, harness, A2A, RAG, API, frameworks), each grounded against the real repos. **Date:** 2026-07-17.
 
+**Progress (2026-07-22):** OS Phase 0 (the observable context-plane walking skeleton) is complete and validated: the four context verbs, the scheduler, the observability trace, `examples/log_look.py`, and passing unit tests are on disk, producing `examples/logs/trace.jsonl` end to end. The `ws` workflow shipped the task-approval and task-launch protocols and retired `orchestrator.py`, which closes the harness bug flagged below (completion on exit-code-0, hardcoded `repo_dir`) and most of Phase 3. Estate Phase 0 (the two agentic standards) is now unblocked and resuming.
+
 ---
 
 ## 🔍 What the Panel Found (Corrections to the Briefing)
