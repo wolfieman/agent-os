@@ -11,7 +11,7 @@ This document outlines how the successful, hand-rolled collaboration patterns fr
 | Blackboard (`state.json`) | **Scheduler Task Blackboard** | An OS-managed task blackboard system. It tracks task states, assigned actors, plans, and completion checkpoints. |
 | File Locks (`state.lock`) | **Concurrency Lock Manager** | A standardized mechanism for acquiring, renewing, and releasing lock leases on workspace paths to prevent concurrent write collisions. |
 | Handoffs (`to_<actor>.md`) | **Structured Handoff Messages** | The basis of the Agent-to-Agent (A2A) protocol. Promoted from plain markdown to structured JSON/XML payloads. |
-| `pending_approval` HITL Gate | **Harness HITL Oversight Gate** | Standardized Human-in-the-Loop gates triggered by risk heuristics (e.g. actions on sensitive paths or values above threshold). |
+| `pending_approval` Gate | **Risk-Tiered HOTL Escalation Gate** | Human-on-the-loop oversight: autonomous by default, escalating to a blocking approval only on risk heuristics (sensitive paths, values above threshold). Generalizes the harness's blanket HITL into risk-tiered escalation; see ADR 0008. |
 | UTC/Local Timestamps | **Timezone Offset Standard** | Enforced ISO 8601 timestamps using local timezones with offsets (e.g., `-04:00` or `-05:00`), never raw UTC `Z`. |
 
 ---
@@ -53,5 +53,5 @@ In `agent-os`, handoffs are promoted to a two-part format:
 
 ## 🚦 5. Harness HITL Gate & Time Policy
 
-- **The HITL safety net:** The `pending_approval` status halts execution. The user can review the proposed handoff and execution plan before the scheduler dispatches the agent process.
+- **The oversight safety net (risk-tiered HOTL):** For an escalated task, the `pending_approval` status halts execution so the user can review the proposed handoff and plan before dispatch. In the kernel this fires on risk tiers, not on every task (ADR 0008); the ws harness's every-task gate is the stricter dogfooding variant.
 - **Timezone offsets:** Every timestamp written to logs, traces, lock files, and handoffs must include the local timezone offset to avoid coordination errors during timezone shifts.

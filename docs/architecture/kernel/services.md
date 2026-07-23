@@ -10,7 +10,7 @@ The Scheduler is responsible for managing task lifecycles, assigning tasks to ag
 
 - **Responsibilities:**
   - Maintain the active blackboard state (`state.json`).
-  - Enforce Human-in-the-Loop (HITL) gates on tasks marked `pending_approval`.
+  - Surface risk-tiered human-on-the-loop (HOTL) escalation: run autonomously by default, and mark a task `pending_approval` only when it crosses a risk tier (privacy deny-list, destructive/irreversible ops, or spend above threshold). The policy lives in Guardrails; see [ADR 0008](file:///home/wolfie/projects/agent-os/docs/decisions/0008-hotl-oversight-model.md).
   - Dispatch agent processes in isolated sandbox environments.
   - Coordinate workspace lock leases.
 - **Syscall / API Interface:**
@@ -90,6 +90,7 @@ Guardrails act as the safety net, analyzing inputs and validating outputs.
   - **Input Guardrails:** Inspect incoming prompts for prompt injections or malicious override attempts.
   - **Output Guardrails (AI Firewall):** Inspect model outputs before executing actions or returning results to verify structured formatting (e.g. valid JSON) and prevent Data Loss Prevention (DLP) violations.
   - **Verification Enforcement:** Enforce the "finish gate" rule, rejecting task completion if the output lacks verified proof (e.g. output format check, test check).
+  - **Risk-Tiered Escalation (HOTL):** Hold the risk-tier policy and decide when an action must escalate to a blocking human approval (privacy deny-list, destructive ops, spend above threshold); the default path stays autonomous. See [ADR 0008](file:///home/wolfie/projects/agent-os/docs/decisions/0008-hotl-oversight-model.md).
 - **Syscall / API Interface:**
   - `validate_input(prompt: str) -> bool`
   - `validate_output(output: str, schema: dict) -> OutputValidationResult`

@@ -1,6 +1,6 @@
 # 🪶 ADR 0007: Framework-Light Kernel Design
 
-- **Status:** Proposed
+- **Status:** Accepted (2026-07-22; implemented in OS Phase 0, ce-093/ce-094)
 - **Date:** 2026-07-18
 - **Authors:** agy (architecture)
 - **Decides:** Keeping the core `agent-os` kernel hand-built and lightweight (framework-light), while recommending frameworks (such as LangGraph) exclusively for the sibling policy layer (`agent-teams`).

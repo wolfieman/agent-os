@@ -1,6 +1,6 @@
 # 🧩 ADR 0006: Context Plane as Kernel Foundation
 
-- **Status:** Proposed
+- **Status:** Accepted (2026-07-22; implemented in OS Phase 0, ce-093/ce-094)
 - **Date:** 2026-07-18
 - **Authors:** agy (architecture)
 - **Decides:** Positioning the Context Plane as the central foundation layer of the agent-os kernel, sitting under the six services and above the raw model.

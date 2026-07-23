@@ -15,7 +15,7 @@ This document outlines the vertical layering of Agent OS, mapping the data flow 
                              v
 +-----------------------------------------------------------+
 |                      KERNEL SERVICES                      |
-| (Mechanisms: Scheduler, Memory, Tools, Identity, Obs)     |
+| (Scheduler, Memory, Tools, Identity, Obs, Guardrails)     |
 +-----------------------------------------------------------+
                              | Feeds context contributions
                              v
@@ -73,4 +73,4 @@ The uppermost layer represents the application space. It defines the specific go
 
 - **Single Agents:** Bounded CLI tools running targeted scripts.
 - **Agent Teams:** Orchestrated multi-agent topologies (e.g., supervisor managers, reviewer loops, state graphs).
-- **HITL Integration:** Human-in-the-loop approval gates for high-stakes or destructive operations.
+- **HOTL Integration:** Human-on-the-loop oversight — autonomous by default, with a blocking approval gate only for high-stakes or destructive operations (risk-tiered escalation; see [ADR 0008](file:///home/wolfie/projects/agent-os/docs/decisions/0008-hotl-oversight-model.md)).

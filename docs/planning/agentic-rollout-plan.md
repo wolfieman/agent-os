@@ -150,7 +150,7 @@ Your file-based handoffs already have a rough version (What Has Been Done / Next
 
 ## ➕ Addendum v1.2: The agent-os Pivot and the Context Plane
 
-Added 2026-07-18. Working Phase 0 bullet 1 (reconcile the inventory) surfaced that the highest-leverage asset is not a doc to catalog but a system to build: an **agent operating system** (`agent-os`, its own repo). The initiative's center of gravity is now that build; the estate-wide Phase 0 above is **paused, contingent on the OS** (writing the asset map and the CLI/MCP/API standards before the OS exists means writing them twice, since the OS reorganizes what the assets are and how they are categorized). Research and plan now live in `agent-os/docs/`; live coordination stays in `inter-agency/context-engineering/`.
+Added 2026-07-18. Working Phase 0 bullet 1 (reconcile the inventory) surfaced that the highest-leverage asset is not a doc to catalog but a system to build: an **agent operating system** (`agent-os`, its own repo). The initiative's center of gravity is now that build; the estate-wide Phase 0 above was **paused, contingent on the OS** (writing the asset map and the CLI/MCP/API standards before the OS exists means writing them twice, since the OS reorganizes what the assets are and how they are categorized). That pause was **lifted 2026-07-22** once OS Phase 0 (the context-plane walking skeleton) shipped, per the Progress note at the top of this plan. Research and plan now live in `agent-os/docs/`; live coordination stays in `inter-agency/context-engineering/`.
 
 ### The Foundation: The Context Plane
 
@@ -255,7 +255,7 @@ Added 2026-07-18. Following a deep architecture review, the open questions from 
 
 ### A. Recommended Decisions for wolfie
 
-1. **adagio auth:** Accept Tailscale-only for local coordinate transport, but require token-based auth for the VM database write tools. Set a unique API key for each agent in their local environment config (rather than the global placeholder `"ollama"`) to satisfy the secure-agents guide's **non-human identity** principle.
+1. **adagio auth:** Accept Tailscale-only for local coordinate transport, but require token-based auth for the VM database write tools. Set a unique API key for each agent in their local environment config (rather than the global placeholder `"ollama"`) to satisfy the secure-agents guide's **non-human identity** principle. *(Superseded by Addendum v1.4: the decision settled as accept-and-document Tailscale-only with no per-agent token; the token path is reserved and trigger-gated in `agent-os/OPEN-ITEMS.md`.)*
 2. **Pilot confirmation:** Confirm `life-admin` monthly `budget-close` and `loan-payoff` as the first skills. Set `disable-model-invocation: true` on both skills in frontmatter to guarantee they are only triggered manually by the user, ensuring financial operations are never run autonomously.
 3. **Execution team:** Route the execution of rollout tasks to the actual inter-agency actors (agy, cowork, codex) via the blackboard state.json protocol to dogfood the coordination fabric.
 4. **Sequencing appetite:** Run Phase 1 (skills) and Phase 5 (agentic-lab LangGraph) in parallel to maximize development velocity, as they have zero cross-dependencies. Gate the core OS kernel development on Phase 0 and Phase 2 (RAG/adagio setup).
