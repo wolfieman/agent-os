@@ -240,7 +240,7 @@ The OS's own Phase 0 is the walking skeleton: **an observable context-assembly s
 
 ## 🧭 Open Decisions for wolfie (Before or During Execution)
 
-1. **adagio auth:** accept-and-document Tailscale-only, or add a real credential? (Phase 0.)
+1. **adagio auth:** Settled (accept-and-document Tailscale-only; see Addendum v1.4).
 2. **Pilot confirmation:** life-admin `budget-close` as the first skill? (Phase 1.)
 3. **Execution team:** run each phase via my subagents, or route to the real inter-agency actors (agy/codex/...) via the blackboard? (The plan assumes the latter for the dogfood; confirm.)
 4. **Sequencing appetite:** run phases strictly in order (0→5), or parallelize the independent ones (Phase 1 skills + Phase 5 agentic-lab have no cross-dependency)?
@@ -274,3 +274,13 @@ The initial implementation will stand up the Context-Assembly service as the min
    - Create a diagnostic triage agent (`examples/log_look.py`) that reads system/fleet log entries.
    - It invokes `ContextAssemblyService` to construct its frame (instructions, log data as user input, active blackboard step state, and tool schemas).
    - Runs the agent query (streamed) and writes a complete trace file showing frame construction, inputs, outputs, and provenance.
+
+---
+
+### Addendum v1.4: Settlement of adagio Auth Decision (2026-07-22)
+
+The adagio-auth decision is officially settled: **accept-and-document Tailscale-only**.
+- **Posture:** The Ollama API is exposed only via `tailscale serve` over the tailnet (mutually-authenticated overlay), which serves as the security boundary.
+- **Inert Stub:** The `api_key="ollama"` value in `agent.py` is documented as an inert string required by the OpenAI-compatible client, not a credential.
+- **Code-Hygiene:** The default base URL is single-sourced via the `OLLAMA_BASE_URL` environment variable (removing the hardcoded default from source code).
+- **Codification:** The rule is codified in `orchestrator/standards/agentic/api-constants.md` (to be drafted).
